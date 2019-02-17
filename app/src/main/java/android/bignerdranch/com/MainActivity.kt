@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,14 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //wiring up views
-        val nameTextView = findViewById<TextView>(R.id.nameTextView)
-        val raceTextView = findViewById<TextView>(R.id.raceTextView)
-        val dexterityTextView = findViewById<TextView>(R.id.dexterityTextView)
-        val wisdomTextView = findViewById<TextView>(R.id.wisdomTextView)
-        val strengthTextView = findViewById<TextView>(R.id.strengthTextView)
+        displayCharacterData()
+    }
 
-        val generateButton = findViewById<Button>(R.id.generateButton)
-        //
+    private fun displayCharacterData(){
         characterData.run {
             nameTextView.text = name
             raceTextView.text = race
