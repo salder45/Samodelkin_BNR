@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //setting a click listener
+        generateButton.setOnClickListener{
+            characterData = CharacterGenerator.generate()
+            displayCharacterData()
+        }
         //wiring up views
         displayCharacterData()
     }
