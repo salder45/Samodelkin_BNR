@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         characterData = savedInstanceState?.characterData ?: CharacterGenerator.generate()
         //setting a click listener
         generateButton.setOnClickListener{
-            characterData = CharacterGenerator.fromApiData("halfling,Lars Kizzy,14,13,8")
+            characterData = fetchCharacterData()
             displayCharacterData()
         }
         //wiring up views
