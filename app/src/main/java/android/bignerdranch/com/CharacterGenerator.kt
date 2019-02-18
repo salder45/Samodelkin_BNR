@@ -19,6 +19,11 @@ object CharacterGenerator {
                              val wis: String,
                              val str: String): Serializable
 
+    fun fromApiData(apiData: String): CharacterData {
+        val (race, name, dex, wis, str) = apiData.split(",")
+        return CharacterData(name, race, dex, wis, str)
+    }
+
     private fun name() = "${firstName.rand()} ${lastName.rand()}"
     private fun race() = listOf("darwf", "elf", "human", "halfling").rand()
 
