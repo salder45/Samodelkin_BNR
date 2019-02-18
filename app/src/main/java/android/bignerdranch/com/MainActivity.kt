@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 private const val CHARACTER_DATA_KEY = "CHARACTER_DATA_KEY"
 
@@ -27,8 +30,10 @@ class MainActivity : AppCompatActivity() {
         characterData = savedInstanceState?.characterData ?: CharacterGenerator.generate()
         //setting a click listener
         generateButton.setOnClickListener{
-            characterData = fetchCharacterData()
-            displayCharacterData()
+            GlobalScope.launch (Dispatchers.Main){
+                characterData = fetchCharacterData().await()
+                displayCharacterData()
+            }
         }
         //wiring up views
         displayCharacterData()
