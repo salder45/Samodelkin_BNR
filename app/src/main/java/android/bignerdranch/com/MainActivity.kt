@@ -27,7 +27,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //
-        characterData = savedInstanceState?.characterData ?: CharacterGenerator.generate()
+        characterData = savedInstanceState?.characterData ?: let{
+            GlobalScope.launch (Dispatchers.Main){
+                characterData = fetchCharacterData().await()
+                displayCharacterData()
+            }
+            setPlaceHolder()
+        }
         //setting a click listener
         generateButton.setOnClickListener{
             GlobalScope.launch (Dispatchers.Main){

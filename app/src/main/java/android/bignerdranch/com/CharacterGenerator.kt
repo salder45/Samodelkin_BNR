@@ -50,3 +50,5 @@ fun fetchCharacterData(): Deferred<CharacterGenerator.CharacterData>{
         CharacterGenerator.fromApiData(apiData)
     }
 }
+
+fun setPlaceHolder() = CharacterGenerator.CharacterData("Generating Character..","","","","")
