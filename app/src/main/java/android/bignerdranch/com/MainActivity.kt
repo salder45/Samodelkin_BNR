@@ -28,18 +28,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //
         characterData = savedInstanceState?.characterData ?: let{
-            GlobalScope.launch (Dispatchers.Main){
-                characterData = fetchCharacterData().await()
-                displayCharacterData()
-            }
+            fetchCharacterFromAPI()
             setPlaceHolder()
         }
         //setting a click listener
         generateButton.setOnClickListener{
-            GlobalScope.launch (Dispatchers.Main){
-                characterData = fetchCharacterData().await()
-                displayCharacterData()
-            }
+            fetchCharacterFromAPI()
         }
         //wiring up views
         displayCharacterData()
@@ -52,6 +46,15 @@ class MainActivity : AppCompatActivity() {
             dexterityTextView.text = dex
             wisdomTextView.text = wis
             strengthTextView.text = str
+        }
+    }
+
+    private fun fetchCharacterFromAPI(){
+        GlobalScope.launch(Dispatchers.Main) {
+            do{
+                characterData = fetchCharacterData().await()
+            }while (characterData.str.toInt() < 10)
+            displayCharacterData()
         }
     }
 }
